@@ -13,7 +13,7 @@ const page = async ({ params }) => {
   return (
     <div className="h-[calc(100vh-5rem)] w-screen relative mb-12">
       <div className="flex h-full w-full flex-col gap-4 md:gap-12 lg:gap-24 xl:px-36 lg:px-20 md:px-12 px-4 pt-12">
-        <h1 className="text-6xl font-extrabold capitalize text-center mb-12">
+        <h1 className="text-5xl lg:text-7xl text-accent font-extrabold capitalize text-center mb-12">
           {params.category}
         </h1>
         {posts.map((item, index) => (

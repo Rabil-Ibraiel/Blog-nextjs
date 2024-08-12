@@ -4,12 +4,19 @@ import Link from "next/link";
 import Logout from "./buttons/Logout";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const HeaderNav = ({ session }) => {
   const [open, setOpen] = useState(false);
+  const pathName = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathName]);
+
   return (
-    <div className="w-screen h-20 items-center flex justify-end relative ">
+    <div className="w-screen h-20 items-center flex justify-end  ">
       <div className="w-3/4 xl:flex hidden items-center justify-between over">
         <nav className="flex items-center justify-center gap-12 text-2xl w-2/4">
           <Link href={"/category/technology"}>Technology</Link>
@@ -34,11 +41,15 @@ const HeaderNav = ({ session }) => {
       </div>
 
       <div className="cursor-pointer" onClick={() => setOpen((prev) => !prev)}>
-        {!open ? <IoMenu className="text-5xl xl:hidden" /> : <IoClose className="text-5xl xl:hidden"/>}
+        {!open ? (
+          <IoMenu className="text-5xl xl:hidden" />
+        ) : (
+          <IoClose className="text-5xl xl:hidden" />
+        )}
       </div>
 
       {open && (
-        <div className="text-4xl  font-bold h-fit w-screen absolute top-20 -right-20 bg-background z-50 flex items-center p-24 flex-col overflow-y-auto">
+        <div className="xl:hidden text-4xl overflow-hidden  font-bold h-fit w-screen absolute top-24 -left-4 bg-background z-50 flex items-center p-24 rounded-lg flex-col">
           <div className="w-3/4 flex flex-col items-center">
             <nav className="flex flex-col items-center justify-center pb-12 gap-8 w-2/4 border-b-4 border-secondary">
               <Link href={"/category/technology"}>Technology</Link>

@@ -16,10 +16,10 @@ const LoginForm = () => {
     });
   }
   return (
-    <div className="w-screen h-[calc(100vh-5rem)] flex items-center justify-center lg:px-24 md:px-12 px-6 ">
-      <div className="h-full mt-36 w-full lg:w-[40rem]">
+    <div className="w-screen h-full flex items-center justify-center lg:px-24 md:px-12 px-6 ">
+      <div className="h-full lg:mt-36 md:mt-24 mt-16 w-full lg:w-[40rem]">
         <form action={handleSignIn}>
-          <h1 className="text-5xl font-extrabold mb-8 text-center">
+          <h1 className="text-5xl lg:text-7xl tracking-wide leading-normal font-extrabold mb-8 text-center">
             Login to your Account
           </h1>
 
@@ -44,7 +44,7 @@ const LoginForm = () => {
             name="password"
             id="password"
           />
-          <FormButton className='mt-6'>Login</FormButton>
+          <FormButton className="mt-6">Login</FormButton>
         </form>
       </div>
     </div>

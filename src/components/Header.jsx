@@ -8,9 +8,9 @@ import HeaderNav from "./HeaderNav";
 const Header = async () => {
   const session = await getServerSession(authOptions);
   return (
-    <header className="w-screen bg-secondary flex justify-between items-center px-24 ">
+    <header className="w-screen relative h-24 bg-secondary flex justify-between items-center lg:px-36 md:px-16 px-8 ">
       <Link href={"/"}>
-        <h1 className="text-5xl w-1/4">
+        <h1 className="text-5xl">
           <span className="font-extrabold -mr-2">Rabil</span>Blog
         </h1>
       </Link>

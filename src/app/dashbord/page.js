@@ -110,7 +110,7 @@ const page = async () => {
             spellCheck="false"
             id="body"
             name="body"
-            className="max-w-full whitespace-pre min-h-36 h-60 min-w-full p-2"
+            className="max-w-full min-h-36 h-60 min-w-full p-2 whitespace-pre-line"
             rows={10}
           ></textarea>
           <div className="mt-6">

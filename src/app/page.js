@@ -11,7 +11,7 @@ export default async function Home() {
   await mongoose.connect(process.env.MONGODB_URI);
   const posts = await Post.find({ approved: true });
   return (
-    <main className="flex h-screen w-screen flex-col gap-4 md:gap-12 lg:gap-24 xl:px-36 lg:px-20 md:px-12 px-4 pt-12">
+    <main className="flex h-1 py-12 w-screen flex-col gap-4 md:gap-12 lg:gap-24 xl:px-36 lg:px-20 md:px-12 px-4 pt-12">
       {posts.map((item, index) => (
         <div
           key={item.title}
@@ -19,7 +19,7 @@ export default async function Home() {
             index % 2 !== 0
               ? "lg:flex-row-reverse flex-col"
               : "lg:flex-row flex-col"
-          } ${index === posts.length - 1 && "mb-12"}`}
+          } ${index === posts.length - 1 && "pb-6"}`}
         >
           <div className="lg:w-2/4 lg:h-full h-2/4 w-full relative overflow-hidden rounded-md">
             <Image

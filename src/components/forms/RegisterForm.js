@@ -18,12 +18,10 @@ const RegisterForm = () => {
     }
   }
   return (
-    <div className="w-screen h-[calc(100vh-5rem)] flex items-center justify-center lg:px-24 md:px-12 px-6 ">
-      <div className="h-full mt-36 w-full lg:w-[40rem]">
-        <form
-          action={handleCreateUser}
-        >
-          <h1 className="text-5xl font-extrabold mb-8 text-center">
+    <div className="w-screen h-fit flex items-center justify-center overflow-y-auto overflow-x-hidden lg:px-24 md:px-12 px-6 ">
+      <div className="h-full lg:mt-36 md:mt-16 mt-8 w-full lg:w-[40rem]">
+        <form action={handleCreateUser}>
+          <h1 className="text-5xl lg:text-7xl tracking-wide leading-normal font-extrabold mb-8 text-center">
             Register a new Account
           </h1>
 
