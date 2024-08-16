@@ -20,8 +20,10 @@ const HeaderNav = ({ session }) => {
     <div className="w-screen h-20 items-center flex justify-end  ">
       <div className="w-3/4 xl:flex hidden items-center justify-between over">
         <nav className="flex items-center justify-center gap-12 text-2xl w-2/4">
-          {category.map(item => (
-            <Link href={"/category/" + item.value}>{item.name}</Link>
+          {category.map((item) => (
+            <Link key={item.value} href={"/category/" + item.value}>
+              {item.name}
+            </Link>
           ))}
         </nav>
 
@@ -53,9 +55,9 @@ const HeaderNav = ({ session }) => {
         <div className="xl:hidden text-4xl overflow-hidden font-bold h-fit w-screen absolute top-24 left-0 right-0 bg-background z-50 flex items-center p-24 flex-col">
           <div className="w-3/4 flex flex-col items-center">
             <nav className="flex flex-col items-center justify-center pb-12 gap-8 w-2/4 border-b-4 border-secondary">
-            {category.map(item => (
-            <Link href={"/category/" + item.value}>{item.name}</Link>
-          ))}
+              {category.map((item) => (
+                <Link key={item.value} href={"/category/" + item.value}>{item.name}</Link>
+              ))}
             </nav>
 
             <div className=" w-1/4 flex flex-col mt-12">
