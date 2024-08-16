@@ -1,13 +1,31 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Post from "@/models/Post";
 import mongoose from "mongoose";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 const page = async ({ params }) => {
   await mongoose.connect(process.env.MONGODB_URI);
+  const session = await getServerSession(authOptions);
   const post = await Post.findById(params.id);
+  let textToDisplay = "";
+  if (!post.approved && session?.user?.name === post.user) {
+    textToDisplay = "The Post needs to be Approved by admin to be Public!";
+  } else if (!post.approved && session?.user?.name !== post.user) {
+    return redirect("/dashbord");
+  } else {
+    textToDisplay = "";
+  }
+
   return (
     <div className="h-fit w-screen flex  justify-center overflow-x-hidden pt-12 ">
       <div className="px-4 md:px-10 lg:px-24 w-full md:w-[1200px] ">
+        {textToDisplay && (
+          <p className="w-full text-center text-accent font-bold bg-secondary py-2 rounded text-xl mb-4">
+            {textToDisplay}
+          </p>
+        )}
         <h1 className="lg:text-7xl md:text-6xl text-5xl font-extrabold mb-8">
           {post.title}
         </h1>

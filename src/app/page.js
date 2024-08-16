@@ -1,21 +1,17 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import Logout from "@/components/buttons/Logout";
 import Post from "@/models/Post";
 import mongoose from "mongoose";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
   await mongoose.connect(process.env.MONGODB_URI);
-  const posts = await Post.find({ approved: true });
+  const posts = (await Post.find({ approved: true }))?.reverse();
   return (
-    <main className="flex h-1 py-12 w-screen flex-col gap-4 md:gap-12 lg:gap-24 xl:px-36 lg:px-20 md:px-12 px-4 pt-12">
+    <main className="flex h-1 py-12 gap-4 w-screen flex-col md:gap-12 lg:gap-24 xl:px-36 lg:px-20 md:px-12 px-4 pt-12">
       {posts.map((item, index) => (
         <div
           key={item.title}
-          className={`flex w-full lg:gap-12 gap-4 lg:min-h-[30rem] min-h-[40rem] ${
+          className={`flex w-full lg:gap-12 gap-4 lg:min-h-[30rem] min-h-[40rem]  ${
             index % 2 !== 0
               ? "lg:flex-row-reverse flex-col"
               : "lg:flex-row flex-col"
@@ -45,13 +41,13 @@ export default async function Home() {
                   : item.body}
               </p>
 
-              <div className="flex gap-1 md:gap-2 lg:gap-4 items-center mt-auto">
+              <div className="flex gap-2 md:gap-3 lg:gap-4 justify-start mt-auto flex-wrap">
                 {item.category.map(
                   (itemm, indexx) =>
                     itemm && (
                       <p
                         key={itemm}
-                        className={`bg-primary w-fit text-lg font-extrabold px-1 md:px-2 lg:px-4 py-2 rounded-md text-background/80`}
+                        className={`bg-primary w-fit text-lg font-extrabold px-2 md:px-3 lg:px-4 py-2 rounded-md text-background/80`}
                       >
                         {itemm}
                       </p>

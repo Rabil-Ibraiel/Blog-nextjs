@@ -1,9 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-import category from "@/libs/data";
-import { deletePost, newPost } from "@/actions/postAction";
-import FormButton from "@/components/buttons/FormButton";
+import { deletePost } from "@/actions/postAction";
 import Post from "@/models/Post";
 import Image from "next/image";
 
@@ -11,14 +9,17 @@ import { TiDelete } from "react-icons/ti";
 import mongoose from "mongoose";
 import Link from "next/link";
 
-const page = async () => {
+import PostAddForm from "@/components/forms/PostAddForm";
+
+const Page = async () => {
   const session = await getServerSession(authOptions);
   if (!session) {
     return redirect("/login");
   }
 
   await mongoose.connect(process.env.MONGODB_URI);
-  const posts = await Post.find({ user: session?.user?.name });
+  const postsMap = await Post.find({ user: session?.user?.name });
+  const posts = postsMap.reverse();
 
   return (
     <div className="w-screen flex flex-col gap-12 lg:flex-row h-[calc(100vh-5rem)] overflow-x-hidden pt-4">
@@ -77,64 +78,10 @@ const page = async () => {
       </div>
 
       <div className="lg:w-1/2 w-full lg:h-full h-1/2 flex justify-center">
-        <form action={newPost} className="w-full px-4 lg:px-12">
-          <h2 className="w-full text-3xl font-bold text-center mb-4 pb-8">
-            Add a Post
-          </h2>
-          <label htmlFor="title">Title</label>
-          <input
-            autoComplete="off"
-            autoCorrect="off"
-            id="title"
-            type="text"
-            name="title"
-          />
-
-          <label className="mt-2" htmlFor="image">
-            Image (URL)
-          </label>
-          <input
-            autoComplete="off"
-            autoCorrect="off"
-            id="image"
-            type="text"
-            name="image"
-          />
-
-          <label htmlFor="body" className="mt-4">
-            Body
-          </label>
-          <textarea
-            autoComplete="off"
-            autoCorrect="off"
-            spellCheck="false"
-            id="body"
-            name="body"
-            className="max-w-full min-h-36 h-60 min-w-full p-2 whitespace-pre-line"
-            rows={10}
-          ></textarea>
-          <div className="mt-6">
-            <p className="mb-2 -ml-1">Category:</p>
-            {category.map((item, index) => (
-              <div key={item.value} className="flex items-center">
-                <input
-                  type="checkbox"
-                  id={item.value}
-                  name={item.value}
-                  value={item.value}
-                  className="text-4xl scale-125 border-primary bg-primary border"
-                />
-                <label className="ml-2" htmlFor={item.value}>
-                  {item.name}
-                </label>
-              </div>
-            ))}
-          </div>
-          <FormButton className="mt-6 mb-6">Add new Post</FormButton>
-        </form>
+        <PostAddForm />
       </div>
     </div>
   );
 };
 
-export default page;
+export default Page;

@@ -14,11 +14,13 @@ export async function newPost(formData) {
   const technology = formData.get("technology");
   const business = formData.get("business");
   const sport = formData.get("sport");
+  const nature = formData.get("nature");
+  const health = formData.get("health");
 
   try {
     await mongoose.connect(process.env.MONGODB_URI);
     const session = await getServerSession(authOptions);
-    const category = [technology, business, sport];
+    const category = [technology, business, sport, nature, health];
     const newPost = await Post.create({
       title,
       image,

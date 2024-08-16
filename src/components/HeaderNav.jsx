@@ -6,6 +6,7 @@ import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import category from "@/libs/data";
 
 const HeaderNav = ({ session }) => {
   const [open, setOpen] = useState(false);
@@ -19,9 +20,9 @@ const HeaderNav = ({ session }) => {
     <div className="w-screen h-20 items-center flex justify-end  ">
       <div className="w-3/4 xl:flex hidden items-center justify-between over">
         <nav className="flex items-center justify-center gap-12 text-2xl w-2/4">
-          <Link href={"/category/technology"}>Technology</Link>
-          <Link href={"/category/business"}>Business</Link>
-          <Link href={"/category/sport"}>Sport</Link>
+          {category.map(item => (
+            <Link href={"/category/" + item.value}>{item.name}</Link>
+          ))}
         </nav>
 
         <div className="text-2xl w-1/4 flex justify-end">
@@ -49,12 +50,12 @@ const HeaderNav = ({ session }) => {
       </div>
 
       {open && (
-        <div className="xl:hidden text-4xl overflow-hidden  font-bold h-fit w-screen absolute top-24 -left-4 bg-background z-50 flex items-center p-24 rounded-lg flex-col">
+        <div className="xl:hidden text-4xl overflow-hidden font-bold h-fit w-screen absolute top-24 left-0 right-0 bg-background z-50 flex items-center p-24 flex-col">
           <div className="w-3/4 flex flex-col items-center">
             <nav className="flex flex-col items-center justify-center pb-12 gap-8 w-2/4 border-b-4 border-secondary">
-              <Link href={"/category/technology"}>Technology</Link>
-              <Link href={"/category/business"}>Business</Link>
-              <Link href={"/category/sport"}>Sport</Link>
+            {category.map(item => (
+            <Link href={"/category/" + item.value}>{item.name}</Link>
+          ))}
             </nav>
 
             <div className=" w-1/4 flex flex-col mt-12">
